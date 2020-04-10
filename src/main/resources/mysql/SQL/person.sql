@@ -13,7 +13,7 @@ create table person(
 
 --下面这条修改是正确的
 alter table person modify column
-    ID int(11) not null auto_increment comment "编号";
+    ID int(11) not null auto_increment comment "人物编号";
 
 
 insert into person(
@@ -27,3 +27,5 @@ insert into person(
 ) values(
     "黄蓉", 1, "桃花岛"
 ) ;
+
+

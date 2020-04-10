@@ -1,12 +1,16 @@
 package com.jgc;
 
+import com.alibaba.druid.pool.DruidDataSource;
 import com.jgc.bean.Person;
 import com.jgc.mapper.PersonMapper;
 import com.jgc.mysql.SqlSessionMag;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * @description:
@@ -58,5 +62,21 @@ public class MyTest {
                 sqlSession.close();
             }
         }
+    }
+
+    @Test
+    public void springTest()  {
+        try {
+            ApplicationContext app = new ClassPathXmlApplicationContext("springcontext.xml");
+            SqlSessionFactory sqlSessionFactory = (SqlSessionFactory) app.getBean("sqlSessionFactory");
+            SqlSession sqlSession = sqlSessionFactory.openSession();
+            Class personMapperClass= Class.forName("com.jgc.mapper.PersonMapper");
+            PersonMapper personMapper = (PersonMapper) sqlSession.getMapper(personMapperClass);
+            Person person = personMapper.getPersonByID(1);
+            log.info(person.toString());
+        }catch (Exception e){
+            log.error("异常信息", e);
+        }
+
     }
 }
