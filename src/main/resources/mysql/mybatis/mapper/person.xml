@@ -6,4 +6,13 @@
     <select id="getPersonByID" resultType="person">
         select * from person where id = #{id}
     </select>
+
+    <insert id="savePerson">
+        insert into person(
+            addr,last_name,gender
+        )
+        values (
+            #{addr}, #{lastName}, #{gender}
+        )
+    </insert>
 </mapper>

@@ -34,4 +34,27 @@ public class MyTest {
             }
         }
     }
+
+
+    @Test
+    public void save() {
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = new SqlSessionMag().getSqlSession();
+            Class personMapperClass= Class.forName("com.jgc.mapper.PersonMapper");
+            PersonMapper personMapper = (PersonMapper) sqlSession.getMapper(personMapperClass);
+            Person p = new Person();
+            p.setLastName("乔峰");
+            p.setAddr("蒙古");
+            p.setGender(0);
+            boolean saveFlag = personMapper.savePerson(p);
+            log.info(String.valueOf(saveFlag));
+        }catch (Exception e) {
+            log.error("异常信息", e);
+        } finally {
+            if (sqlSession != null) {
+                sqlSession.close();
+            }
+        }
+    }
 }
