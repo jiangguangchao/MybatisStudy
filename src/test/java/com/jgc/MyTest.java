@@ -44,11 +44,13 @@ public class MyTest {
             Class personMapperClass= Class.forName("com.jgc.mapper.PersonMapper");
             PersonMapper personMapper = (PersonMapper) sqlSession.getMapper(personMapperClass);
             Person p = new Person();
-            p.setLastName("乔峰");
-            p.setAddr("蒙古");
-            p.setGender(0);
+            p.setLastName("小龙女");
+            p.setAddr("古墓");
+            p.setGender(1);
             boolean saveFlag = personMapper.savePerson(p);
+            sqlSession.commit();
             log.info(String.valueOf(saveFlag));
+            log.info(p.toString());
         }catch (Exception e) {
             log.error("异常信息", e);
         } finally {

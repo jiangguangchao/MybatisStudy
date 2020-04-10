@@ -3,11 +3,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.jgc.mapper.PersonMapper">
+
+    <!--因为namespace声明了该映射文件对应的接口，在接口中的方法已经声明了参数类型
+    和返回值类型，所以这里不用写parameterType和resultMap-->
     <select id="getPersonByID" resultType="person">
         select * from person where id = #{id}
     </select>
 
-    <insert id="savePerson">
+    <insert id="savePerson" useGeneratedKeys="true" keyProperty="ID">
         insert into person(
             addr,last_name,gender
         )
